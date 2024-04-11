@@ -1,5 +1,5 @@
 # java-students-repo
-This project is still WIP.
+This project is still WIP but most of it is functional.
 
 It's a Springboot repository with some example data.
 
