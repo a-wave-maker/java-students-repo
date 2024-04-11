@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Add your head content here -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Students</title>
+</head>
+<body>
+
+<h2>Search Students</h2>
+
+<form th:action="@{/students/search/results}" method="get">
+    <label for="surname">Surname:</label>
+    <input type="text" id="surname" name="surname">
+
+    <label for="birthday">Birthday:</label>
+    <input type="date" id="birthday" name="birthday">
+
+    <label for="index">Index:</label>
+    <input type="text" id="index" name="index">
+
+    <label for="enrolled">Enrolled:</label>
+    <input type="checkbox" id="enrolled" name="enrolled">
+
+    <button type="submit">Search</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+
+<body>
+
+<nav>
+    <ul>
+        <li><a th:href="@{/faculties}">Faculties</a></li>
+        <li><a th:href="@{/courses}">Courses</a></li>
+        <li><a th:href="@{/students}">Students</a></li>
+    </ul>
+</nav>
+
+<h2>Search Results</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>Birthday</th>
+        <th>Index</th>
+        <th>Enrolled</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student : ${students}">
+        <td th:text="${student.getId()}"></td>
+        <td th:text="${student.getName()}"></td>
+        <td th:text="${student.getSurname()}"></td>
+        <td th:text="${student.getEmail()}"></td>
+        <td th:text="${#temporals.format(student.getBirthday(), 'dd-MM-yyyy')}"></td>
+        <td th:text="${student.getIndex()}"></td>
+        <td th:text="${student.isEnrolled()}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Pagination Controls -->
+<div th:if="${totalPages > 1}">
+    <ul class="pagination">
+        <li th:if="${currentPage > 0}">
+            <a th:href="@{/students/search/results(page=0)}">First</a>
+        </li>
+        <li th:if="${currentPage > 0}">
+            <a th:href="@{/students/search/results(page=${currentPage - 1})}">Previous</a>
+        </li>
+        <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:class="${currentPage == i} ? 'active' : ''">
+            <a th:href="@{/students/search/results(page=${i})}" th:text="${i + 1}"></a>
+        </li>
+        <li th:if="${currentPage < totalPages - 1}">
+            <a th:href="@{/students/search/results(page=${currentPage + 1})}">Next</a>
+        </li>
+        <li th:if="${currentPage < totalPages - 1}">
+            <a th:href="@{/students/search/results(page=${totalPages - 1})}">Last</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

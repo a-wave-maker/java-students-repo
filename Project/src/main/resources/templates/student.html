@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students</title>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a th:href="@{/faculties}">Faculties</a></li>
+        <li><a th:href="@{/courses}">Courses</a></li>
+    </ul>
+</nav>
+
+<div>
+    <h2>Student</h2>
+    <ul>
+        <li>
+            Name: <span th:text="${student.getName() + ' ' + student.getSurname()}"></span>
+            Email: <span th:text="${student.getEmail()}"></span>
+            Birthday:<span th:text="${student.getBirthday()}"></span>
+            Index: <span th:text="${student.getIndex()}"></span>
+            Enrolled: <span th:text="${student.isEnrolled()}"></span>
+            Course count: <span th:text="${student.calculateCourseCount()}"></span>
+        </li>
+    </ul>
+    <h2>Courses</h2>
+    <ul>
+        <th:block th:each="index : ${#numbers.sequence(0, courseList.size() - 1)}">
+            <li th:with="course=${courseList[index]}, enrolledStatus=${enrolledStatusList[index]}">
+                <span th:text="${course.name}"></span>
+                <span th:if="${enrolledStatus}">Enrolled</span>
+                <button th:if="${enrolledStatus}" th:onclick="|removeFromCourse(${course.id})|">Remove from course</button>
+                <button th:unless="${enrolledStatus}" th:onclick="|enrollToCourse(${course.id})|">Enroll to course</button>
+            </li>
+        </th:block>
+    </ul>
+
+
+</div>
+
+
+</body>
+</html>

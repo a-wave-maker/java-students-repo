@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a th:href="@{/faculties}">Faculties</a></li>
+        <li><a th:href="@{/students}">Students</a></li>
+    </ul>
+</nav>
+
+<div>
+    <h2>Courses</h2>
+    <ul>
+        <li th:each="course : ${courses}">
+            <span th:text="${course.getName()}"></span>
+            <button th:onclick="'addCourse(' + ${course.getId()} + ')'" >Add</button>
+            <button th:onclick="'editCourse(' + ${course.getId()} + ')'" >Edit</button>
+            <button th:onclick="'deleteCourse(' + ${course.getId()} + ')'" >Delete</button>
+            <a th:href="@{'/courses/' + ${course.getId()} + '/students'}">View Students</a>
+        </li>
+    </ul>
+    <table>
+        <tr>
+            <th>Course</th>
+            <th>Number of Students</th>
+        </tr>
+        <tr th:each="result : ${studentCount}">
+            <td th:text="${result[0].getName()}">Course Name</td>
+            <td th:text="${result[1]}">0</td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
